@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.appsinventiv.phonemartadmin.Activities.AdPage;
 import com.appsinventiv.phonemartadmin.Models.AdModel;
 import com.appsinventiv.phonemartadmin.R;
 import com.appsinventiv.phonemartadmin.Utils.AppConfig;
@@ -68,7 +69,7 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.ViewHolder> {
 //        Glide.with(ctx).load(model.getImages()).into(holder.thumbnail);
         String[] imagesList = model.getImages().split(",");
         if (imagesList[0].contains("apollo-singapore")) {
-            Glide.with(ctx).load(imagesList[0]+";s=200x200").into(holder.thumbnail);
+            Glide.with(ctx).load(imagesList[0] + ";s=200x200").into(holder.thumbnail);
 
         } else {
             Glide.with(ctx).load(AppConfig.BASE_URL_Image + imagesList[0]).into(holder.thumbnail);
@@ -99,6 +100,14 @@ public class AdsAdapter extends RecyclerView.Adapter<AdsAdapter.ViewHolder> {
                 model.setStatus("rejected");
                 holder.status.setText(model.getStatus());
                 callback.onReject(model);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, AdPage.class);
+                i.putExtra("adId", "" + model.getId());
+                ctx.startActivity(i);
             }
         });
     }

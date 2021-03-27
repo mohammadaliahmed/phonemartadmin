@@ -214,6 +214,12 @@ public interface UserClient {
             @Body JsonObject jsonObject
 
     );
+    @Headers("Content-Type: application/json")
+    @POST("api/ad/viewAd")
+    Call<ApiResponse> viewAd(
+            @Body JsonObject jsonObject
+
+    );
 
     @Headers("Content-Type: application/json")
     @POST("api/admin/rejectAd")

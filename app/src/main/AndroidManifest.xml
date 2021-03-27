@@ -30,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.AdPage" />
 
 
         <service android:name="com.appsinventiv.phonemartadmin.Utils.MyFirebaseMessagingService">

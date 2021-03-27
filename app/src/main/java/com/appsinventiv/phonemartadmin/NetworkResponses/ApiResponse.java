@@ -23,6 +23,17 @@ public class ApiResponse {
     @SerializedName("ads")
     @Expose
     private List<AdModel> adsList = null;
+    @SerializedName("ad")
+    @Expose
+    private AdModel adModel = null;
+
+    public AdModel getAdModel() {
+        return adModel;
+    }
+
+    public void setAdModel(AdModel adModel) {
+        this.adModel = adModel;
+    }
 
     public String getFcm_key() {
         return fcm_key;
