@@ -143,11 +143,12 @@ public class Splash extends AppCompatActivity {
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-
+//                CommonUtils.showToast("done");
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
+//                CommonUtils.showToast("error");
 
             }
         });
@@ -174,23 +175,20 @@ public class Splash extends AppCompatActivity {
         map.addProperty("api_username", AppConfig.API_USERNAME);
         map.addProperty("api_password", AppConfig.API_PASSOWRD);
         map.addProperty("id", model.getId());
-        Call call = null;
-        if (isChecked) {
-            call = getResponse.approveAd(map);
-        } else {
-            call = getResponse.pendingAd(map);
-        }
+        map.addProperty("status", isChecked ? "active" : "pending");
+        Call call = getResponse.approveAd(map);
+
 
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.code() == 200) {
                     CommonUtils.showToast("Done");
-                    if (isChecked) {
-                        if (response.body().getFcm_key() != null) {
-                            sendNotification(response.body().getFcm_key(), "You ad is approved", "Click to view");
-                        }
+
+                    if (response.body().getFcm_key() != null) {
+                        sendNotification(response.body().getFcm_key(), "You ad is " + (isChecked ? "approved" : "pending"), "Click to view");
                     }
+
                 }
             }
 
